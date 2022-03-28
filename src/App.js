@@ -1,23 +1,32 @@
 import logo from './logo.svg';
 import './App.css';
+import ToastPortal from './ToastPortal/ToastPortal';
+import { useRef } from 'react';
+
+
+
+
 
 function App() {
+  const toastRef = useRef()
+  // {message : " this is a toast 1" , mode : "info", id : uuidv4()}
+
+  const addToast = ()=>{
+    toastRef.current.addToast({message : " this is a toast 1" , mode : "info"})
+
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div>
+        <button onClick={ ()=> {
+          console.log("click")
+          addToast() }}  >open</button>
+        <button>info</button>
+        <button>error</button>
+      </div>
+
+      <ToastPortal ref={toastRef} />
     </div>
   );
 }
